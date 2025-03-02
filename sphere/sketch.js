@@ -11,8 +11,11 @@ let numPhiValue;
 let radiusValue;
 let twistValue;
 
+let animationInputValue;
+let animationInput;
+
 function setup() {
-  createCanvas(600, 600, WEBGL);
+  createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   angleMode(DEGREES);
   colorMode(HSB);
 
@@ -20,18 +23,8 @@ function setup() {
   divEl.class('controller');
   divEl.position(20, 20);
 
-  horizonLineInput = createInput();
-  horizonLineInputValue = createDiv();
-  horizonLineInput.attribute('type', 'checkbox');
-  divEl.child(horizonLineInputValue);
-  divEl.child(horizonLineInput);
-  horizonLineInputValue.html(`horizonLine: ${horizonLineInput.elt.checked}`);
-  horizonLineInput.elt.addEventListener('change', () => {
-    horizonLineInputValue.html(`horizonLine: ${horizonLineInput.elt.checked}`);
-  });
-
   numThetaValue = createDiv();
-  numThetaSlider = createSlider(0, 100, 50, 1);
+  numThetaSlider = createSlider(0, 200, 50, 1);
   divEl.child(numThetaValue);
   divEl.child(numThetaSlider);
   numThetaValue.html(`numTheta: ${numThetaSlider.value()}`);
@@ -49,7 +42,7 @@ function setup() {
   });
 
   radiusValue = createDiv();
-  radiusSlider = createSlider(30, 180, 180, 1);
+  radiusSlider = createSlider(30, 400, 200, 1);
   divEl.child(radiusValue);
   divEl.child(radiusSlider);
   radiusValue.html(`radius: ${radiusSlider.value()}`);
@@ -58,18 +51,35 @@ function setup() {
   });
 
   twistValue = createDiv();
-  twistSlider = createSlider(-2, 2, 1, 0.01);
+  twistSlider = createSlider(-12, 12, 1, 0.01);
   divEl.child(twistValue);
   divEl.child(twistSlider);
   twistValue.html(`twist: ${twistSlider.value()}`);
   twistSlider.elt.addEventListener('input', () => {
     twistValue.html(`twist: ${twistSlider.value()}`);
   });
+
+  horizonLineInput = createInput();
+  horizonLineInputValue = createDiv('horizonLine:');
+  horizonLineInputValue.style('margin-top', '5px');
+  horizonLineInput.attribute('type', 'checkbox');
+  horizonLineInputValue.child(horizonLineInput);
+  divEl.child(horizonLineInputValue);
+
+  animationInputValue = createDiv('animation: ');
+  animationInput = createInput();
+  animationInput.attribute('type', 'checkbox');
+  animationInputValue.child(animationInput);
+  divEl.child(animationInputValue);
 }
 
 function draw() {
   background(0);
   orbitControl();
+
+  if (animationInput.elt.checked) {
+    rotateY(frameCount * 0.1);
+  }
 
   const numTheta = numThetaSlider.value();
   const numPhi = numPhiSlider.value();
@@ -110,3 +120,7 @@ function draw() {
     }
   }
 }
+
+window.addEventListener('resize', () => {
+  resizeCanvas(window.innerWidth, window.innerHeight);
+});
