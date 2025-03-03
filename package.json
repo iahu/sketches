@@ -1,9 +1,10 @@
 {
-  "name": "p5.js-playground",
+  "name": "sketches",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "serve": "live-server --quiet",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,7 +13,9 @@
   "description": "",
   "devDependencies": {
     "@types/p5": "^1.7.6",
+    "globals": "^16.0.0",
     "prettier": "^3.5.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.25.0"
   }
 }

@@ -48,7 +48,7 @@ class Ball {
     this.x = x;
     this.y = y;
     this.r = r;
-    this.v = createVector(random(-1, 1), random(-1, 1));
+    this.v = createVector(random(-2, 2), random(-2, 2));
   }
 
   update() {

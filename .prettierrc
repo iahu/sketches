@@ -1,0 +1,8 @@
+{
+  "printWidth": 180,
+  "objectWrap": "preserve",
+  "proseWrap": "preserve",
+  "trailingComma": "all",
+  "singleQuote": true,
+  "tabWidth": 2
+}
