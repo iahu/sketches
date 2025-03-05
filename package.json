@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "serve": "live-server --quiet",
+    "start": "live-server --quiet",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,6 +13,7 @@
   "description": "",
   "devDependencies": {
     "@types/p5": "^1.7.6",
+    "@types/three": "^0.174.0",
     "globals": "^16.0.0",
     "prettier": "^3.5.2",
     "typescript": "^5.7.3",
