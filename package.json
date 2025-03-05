@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "live-server --quiet",
+    "start": "live-server --quiet --ignore=\".git,node_modules\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
