@@ -17,18 +17,25 @@ const onWindowResize = () => {
 window.addEventListener('resize', onWindowResize, false);
 onWindowResize();
 
-const loader = new THREE.TextureLoader();
+{
+  const fog = new THREE.Fog(0xff0000, 1, 10);
+  scene.fog = fog;
+}
 
-const earthSystem = new THREE.Object3D();
-earthSystem.rotation.z = (23 * Math.PI) / 180;
+{
+  const ambLight = new THREE.AmbientLight(0xffffff, 0.2);
+  ambLight.position.set(0, 0, 2);
+  scene.add(ambLight);
+}
 
-const ambLight = new THREE.AmbientLight(0xffffff, 0.2);
-ambLight.position.set(0, 0, 2);
-scene.add(ambLight);
-
-const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-dirLight.position.set(2, 0, 0);
-scene.add(dirLight);
+{
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+  dirLight.target.position.set(0, 0, 0);
+  dirLight.name = 'Sun';
+  dirLight.position.set(2, 0, 0);
+  scene.add(dirLight);
+  scene.add(dirLight.target);
+}
 
 {
   const startsPoints = [];
@@ -47,6 +54,11 @@ scene.add(dirLight);
   const starts = new THREE.Points(starsGeometry, starsMaterial);
   scene.add(starts);
 }
+
+const earthSystem = new THREE.Object3D();
+earthSystem.rotation.z = (23 * Math.PI) / 180;
+
+const loader = new THREE.TextureLoader();
 
 {
   const geometry = new THREE.SphereGeometry(3.6, 32, 32);
@@ -83,15 +95,16 @@ scene.add(dirLight);
   scene.add(moon);
 }
 
-function animate() {
+function animate(time) {
+  const sun = scene.getObjectByName('Sun');
   const earth = scene.getObjectByName('Earth');
   const moon = scene.getObjectByName('Moon');
   orbitControls.update();
-  if (!earth || !moon) return;
+  if (!sun || !earth || !moon) return;
   earth.rotation.y += 0.02;
-  const earthTime = -Date.now() / 1000;
-  const moonTime = 12 - Date.now() / 28000;
-  dirLight.position.set(Math.sin(earthTime), 0.24, Math.cos(earthTime));
+  const earthTime = -time / 1000;
+  const moonTime = -time / 28000 - 10;
+  sun.position.set(Math.sin(earthTime), 0.24, Math.cos(earthTime));
   moon.position.set(100 * Math.sin(moonTime), 0, 100 * Math.cos(moonTime));
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
