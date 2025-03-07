@@ -67,7 +67,7 @@ const loader = new THREE.TextureLoader();
     bumpMap: bumpMap,
     bumpScale: 0.2,
     displacementMap: displaceMap,
-    displacementScale: 0.001,
+    displacementScale: 0.01,
     shininess: 0.8,
   });
   const earth = new THREE.Mesh(geometry, material);
