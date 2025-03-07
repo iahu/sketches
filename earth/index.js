@@ -18,11 +18,6 @@ window.addEventListener('resize', onWindowResize, false);
 onWindowResize();
 
 {
-  const fog = new THREE.Fog(0xff0000, 1, 10);
-  scene.fog = fog;
-}
-
-{
   const ambLight = new THREE.AmbientLight(0xffffff, 0.2);
   ambLight.position.set(0, 0, 2);
   scene.add(ambLight);
