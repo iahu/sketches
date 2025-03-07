@@ -29,7 +29,7 @@ const controller = new OrbitControls(camera, renderer.domElement);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 {
-  const light = new THREE.AmbientLight(0xffffff, 0.2);
+  const light = new THREE.AmbientLight(0xffffff, 0.3);
   scene.add(light);
 }
 {
@@ -56,8 +56,7 @@ planeMap.wrapS = THREE.RepeatWrapping;
 planeMap.wrapT = THREE.RepeatWrapping;
 planeMap.magFilter = THREE.NearestFilter;
 planeMap.colorSpace = THREE.SRGBColorSpace;
-const repeats = 2;
-planeMap.repeat.set(repeats, repeats);
+planeMap.repeat.set(3, 2);
 
 const plane = new THREE.PlaneGeometry(10, 10);
 const planeMaterial = new THREE.MeshPhongMaterial({
@@ -104,7 +103,7 @@ fontLoader.load(
     });
 
     const material = new THREE.MeshPhysicalMaterial({
-      color: 0xeeeeee,
+      color: 0xffffff,
       transmission: 0.9,
       opacity: 1,
       ior: 1.4,
